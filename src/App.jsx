@@ -3,10 +3,10 @@ import { Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./theme";
 import { LanguageProvider, useLang } from "./contexts/LanguageContext";
 import { TooltipProvider } from "./components/ui/tooltip";
-import MainContaint from "./components/MainContaint";
+import MainContent from "./components/MainContent";
 import QuranReader from "./components/QuranReader";
 import Footer from "./components/Footer";
-import Scroll_btn from "./components/Scroll_btn";
+import ScrollButton from "./components/ScrollButton";
 import Top_Head from "./components/Top_Head";
 import SplashScreen from "./components/SplashScreen";
 import NotFound from "./components/NotFound";
@@ -51,12 +51,12 @@ function AppInner() {
 
               <main className="flex-1 flex justify-center w-full">
                 <div className="w-full max-w-5xl px-4 pb-10">
-                  {activeTab === "prayer" && <MainContaint />}
+                  {activeTab === "prayer" && <MainContent />}
                   {activeTab === "quran"  && <QuranReader />}
                 </div>
               </main>
 
-              <Scroll_btn />
+              <ScrollButton />
               <Footer />
             </div>
           }
