@@ -169,7 +169,7 @@ function SurahList({ surahs, loading, error, t, lang, onSelect, lastRead, onRetr
 }
 
 /* ── Sub-component: SurahView ─────────────────────────────────────── */
-function SurahView({ surahNum, surahs, t, lang, onBack, onNavigate, showTranslation, fontSize, onAyahVisible }) {
+function SurahView({ surahNum, surahs, t, onNavigate, showTranslation, fontSize, onAyahVisible }) {
   const [arAyahs, setArAyahs] = useState([]);
   const [enAyahs, setEnAyahs] = useState([]);
   const [loading, setLoading]  = useState(true);

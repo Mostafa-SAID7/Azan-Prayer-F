@@ -30,5 +30,7 @@ export function playAdhanBeep() {
       osc.stop(start + dur + 0.05);
     });
     setTimeout(() => ctx.close(), 3000);
-  } catch {}
+  } catch {
+    // AudioContext not available or error creating audio
+  }
 }

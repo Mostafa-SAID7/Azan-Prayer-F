@@ -5,7 +5,7 @@ import { cn } from "../lib/utils";
 import { useLang } from "../contexts/LanguageContext";
 import { API_BASE } from "../data/constants";
 import {
-  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription,
+  Dialog, DialogContent, DialogTitle, DialogDescription,
 } from "./ui/dialog";
 import { ScrollArea } from "./ui/scroll-area";
 import { Button } from "./ui/button";

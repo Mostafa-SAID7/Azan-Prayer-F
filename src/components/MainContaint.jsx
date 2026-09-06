@@ -6,7 +6,7 @@ import { cn, playAdhanBeep } from "../lib/utils";
 import { useLang } from "../contexts/LanguageContext";
 import { cities, calculationMethods } from "../data/cities";
 import { DISPLAY_PRAYERS, COUNTDOWN_PRAYERS } from "../data/prayers";
-import { API_BASE, STORAGE, DEFAULT_CALC_METHOD, REGION_META } from "../data/constants";
+import { API_BASE, DEFAULT_CALC_METHOD, REGION_META } from "../data/constants";
 import { usePrayerTracker } from "../hooks/usePrayerTracker";
 import { useNotifications } from "../hooks/useNotifications";
 import { useFavorites } from "../hooks/useFavorites";

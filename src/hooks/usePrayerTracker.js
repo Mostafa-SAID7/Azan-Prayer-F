@@ -15,7 +15,7 @@ export function usePrayerTracker() {
 
   useEffect(() => {
     localStorage.setItem(todayKey(), JSON.stringify(done));
-  }, [done]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [done, todayKey]);
 
   const toggle = useCallback((key) => {
     setDone((prev) => ({ ...prev, [key]: !prev[key] }));
