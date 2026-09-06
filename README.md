@@ -34,17 +34,17 @@
 To run the application locally in less than 5 minutes:
 
 ### Prerequisites
-* **Node.js** (v18.0 or higher)
-* **npm** or **yarn**
+* **Node.js** (v20.11.0 or higher) - See `.nvmrc` for pinned version
+* **npm** (v10.8.2 or higher)
 
 ### Steps
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/payer.git
-cd payer
+git clone https://github.com/Mostafa-SAID7/Azan-Prayer-F.git
+cd Azan-Prayer-F
 
 # 2. Install dependencies
-npm install
+npm ci
 
 # 3. Start development server
 npm run dev
@@ -66,6 +66,7 @@ Detailed guides are located in the [docs](./docs) directory:
 * 🚢 **[Deployment](./docs/DEPLOYMENT.md)** - Complete deployment guide for Vercel, Netlify, GitHub Pages, and Docker.
   * 📋 **[Vercel Setup Guide](./docs/VERCEL_SETUP.md)** - Step-by-step Vercel deployment with environment variables.
   * ✅ **[Deployment Checklist](./docs/DEPLOYMENT_CHECKLIST.md)** - Pre & post-deployment verification checklist.
+  * 🔄 **[CI/CD Pipeline](./docs/CI_CD.md)** - GitHub Actions workflows, secrets setup, and deployment automation.
 * ❓ **[FAQ](./docs/FAQ.md)** - Frequently asked questions about calculation methods and location.
 * 🛠️ **[Troubleshooting](./docs/TROUBLESHOOTING.md)** - Common development and production build issues.
 

@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  NODE_VERSION: 20
+  NODE_VERSION: 20.11.0
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -34,7 +34,7 @@ jobs:
         run: npm ci
 
       - name: Run ESLint
-        run: npm run lint -- --format json > eslint-report.json || true
+        run: npm run lint -- --format json > eslint-report.json
 
       - name: Upload lint report
         if: always()
@@ -101,13 +101,13 @@ jobs:
         run: npm ci
 
       - name: Run npm audit
-        run: npm audit --audit-level=moderate || true
+        run: npm audit --audit-level=moderate
 
       - name: Check for vulnerable packages
         run: npm audit fix --dry-run
 
       - name: OWASP Dependency Check
-        uses: dependency-check/Dependency-Check_Action@main
+        uses: dependency-check/Dependency-Check_Action@v1.1.1
         with:
           project: 'Payer'
           path: '.'
@@ -143,12 +143,9 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Install serve
-        run: npm install -g serve
-
-      - name: Start server
+      - name: Install and start server
         run: |
-          npm install -g serve
+          npm install -g serve@latest
           serve -s dist -l 3000 > /tmp/serve.log 2>&1 &
           echo "Server starting, waiting for readiness..."
           sleep 3
@@ -172,9 +169,6 @@ jobs:
         with:
           uploadArtifacts: true
           runs: 3
-          configPath: ./lighthouserc.json
-        env:
-          LHCI_GITHUB_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           configPath: ./lighthouserc.json
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}

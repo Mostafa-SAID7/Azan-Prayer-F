@@ -6,7 +6,11 @@ on:
   workflow_dispatch:
 
 env:
-  NODE_VERSION: 20
+  NODE_VERSION: 20.11.0
+
+concurrency:
+  group: preview-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
 
 jobs:
   preview-deploy:
@@ -38,33 +42,42 @@ jobs:
 
       - name: Deploy preview to Netlify
         run: |
-          npm install -g netlify-cli
-          DEPLOY_OUTPUT=$(netlify deploy --dir=./dist --site=${{ secrets.NETLIFY_SITE_ID }} --auth=${{ secrets.NETLIFY_AUTH_TOKEN }})
-          PREVIEW_URL=$(echo "$DEPLOY_OUTPUT" | grep -oP 'https://[a-z0-9]+-[a-z0-9]+--[a-z0-9-]+\.netlify\.app' | head -1)
-          echo "deploy-url=$PREVIEW_URL" >> $GITHUB_OUTPUT
-          echo "PREVIEW_URL=$PREVIEW_URL" >> $GITHUB_ENV
+          npx netlify-cli@14.11.0 deploy --dir=./dist --site=${{ secrets.NETLIFY_SITE_ID }} --auth=${{ secrets.NETLIFY_AUTH_TOKEN }} --json > deploy-output.json
+          echo "deploy-output=$(cat deploy-output.json)" >> $GITHUB_ENV
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+      - name: Extract preview URL
+        run: |
+          PREVIEW_URL=$(echo "${{ env.deploy-output }}" | jq -r '.deploy_url')
+          echo "preview-url=$PREVIEW_URL" >> $GITHUB_OUTPUT
+          echo "PREVIEW_URL=$PREVIEW_URL" >> $GITHUB_ENV
         id: netlify
 
-      - name: Comment preview URL
+      - name: Comment preview URL on PR
         uses: actions/github-script@v7
-        if: env.PREVIEW_URL != ''
+        if: github.event_name == 'pull_request' && env.PREVIEW_URL != ''
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const deployUrl = process.env.PREVIEW_URL;
-            if (context.issue && context.issue.number) {
-              github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: `🚀 **Preview deployed to Netlify**\n\n[View Preview](${deployUrl})`
-              });
-            }
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚀 **Preview deployed to Netlify**\n\n[🔗 View Preview](${deployUrl})\n\n📊 [Compare with production](https://azan-prayer.netlify.app)`
+            });
 
-      - name: Add preview check
+      - name: Verify preview deployment
         run: |
-          echo "✅ Preview deployed successfully"
-          echo "URL: ${{ env.PREVIEW_URL }}"
+          PREVIEW_URL="${{ env.PREVIEW_URL }}"
+          for i in {1..30}; do
+            if curl -f "$PREVIEW_URL" > /dev/null 2>&1; then
+              echo "✅ Preview is live at: $PREVIEW_URL"
+              exit 0
+            fi
+            echo "Attempt $i/30: Waiting for preview to be live..."
+            sleep 2
+          done
+          echo "⚠️ Preview may take longer to be available"
