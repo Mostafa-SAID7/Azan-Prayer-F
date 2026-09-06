@@ -555,4 +555,4 @@ A: Update `NETLIFY_AUTH_TOKEN` secret, re-run workflow
 For detailed setup, see:
 - [DEPLOYMENT_SECRETS.md](./.github/DEPLOYMENT_SECRETS.md) - Secret configuration
 - [docs/DEPLOYMENT.md](./DEPLOYMENT.md) - Deployment strategies
-- [docs/VERCEL_SETUP.md](./VERCEL_SETUP.md) - Vercel-specific guide
+
