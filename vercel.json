@@ -1,1 +1,97 @@
-
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "env": {
+    "VITE_ALADHAN_API_URL": "@vite_aladhan_api_url",
+    "VITE_DEFAULT_CITY": "@vite_default_city",
+    "VITE_DEFAULT_COUNTRY": "@vite_default_country",
+    "VITE_DEFAULT_METHOD": "@vite_default_method",
+    "VITE_APP_NAME": "Payer",
+    "VITE_APP_TITLE": "Islamic Prayer Times",
+    "VITE_APP_VERSION": "0.1.0",
+    "VITE_DEBUG": "@vite_debug",
+    "VITE_ENABLE_NOTIFICATIONS": "true",
+    "VITE_ENABLE_PWA": "true",
+    "VITE_ENABLE_QURAN": "true",
+    "VITE_ENABLE_SERVICE_WORKER": "true",
+    "VITE_PWA_CACHE_STRATEGY": "network-first",
+    "VITE_API_TIMEOUT": "8000",
+    "VITE_MAX_RETRIES": "3",
+    "VITE_API_CACHE_TIME": "3600"
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "geolocation=(self), microphone=(), camera=()"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=3600"
+        }
+      ]
+    },
+    {
+      "source": "/service-worker.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.woff2",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.png",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

@@ -63,7 +63,9 @@ Detailed guides are located in the [docs](./docs) directory:
 * ⚡ **[Quick Start](./docs/QUICKSTART.md)** - Fast 5-minute setup checklist.
 * 🏗️ **[Architecture](./docs/ARCHITECTURE.md)** - System design, folder structure, hooks, and contexts.
 * 🔌 **[API Reference](./docs/API.md)** - External integration endpoints (Aladhan and Quran).
-* 🚢 **[Deployment](./docs/DEPLOYMENT.md)** - Detailed deployment guide for Vercel, Netlify, and Docker.
+* 🚢 **[Deployment](./docs/DEPLOYMENT.md)** - Complete deployment guide for Vercel, Netlify, GitHub Pages, and Docker.
+  * 📋 **[Vercel Setup Guide](./docs/VERCEL_SETUP.md)** - Step-by-step Vercel deployment with environment variables.
+  * ✅ **[Deployment Checklist](./docs/DEPLOYMENT_CHECKLIST.md)** - Pre & post-deployment verification checklist.
 * ❓ **[FAQ](./docs/FAQ.md)** - Frequently asked questions about calculation methods and location.
 * 🛠️ **[Troubleshooting](./docs/TROUBLESHOOTING.md)** - Common development and production build issues.
 
