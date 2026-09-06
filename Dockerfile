@@ -3,7 +3,7 @@
 ###############################################
 
 # Stage 1: Build stage
-FROM node:24-alpine AS builder
+FROM node:26-alpine AS builder
 
 WORKDIR /app
 
@@ -19,7 +19,7 @@ RUN npm run build && \
     npm prune --production
 
 # Stage 2: Runtime stage (minimal distroless image)
-FROM node:24-alpine AS distroless-prep
+FROM node:26-alpine AS distroless-prep
 
 WORKDIR /app
 COPY --from=builder /app/dist ./dist
