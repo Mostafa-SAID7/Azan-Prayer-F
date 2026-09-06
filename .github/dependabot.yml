@@ -5,29 +5,33 @@ updates:
     schedule:
       interval: "weekly"
       day: "monday"
-      time: "03:00"
+      time: "09:00"
+    allow:
+      - dependency-type: "production"
+      - dependency-type: "development"
+    reviewers:
+      - "Mostafa-SAID7"
     assignees:
       - "Mostafa-SAID7"
     labels:
       - "dependencies"
       - "automated"
-    auto-merge: true
-    auto-merge-pull-requests: true
-    auto-merge-method: "squash"
-    pull-request-branch-name:
-      separator: "/"
-
+    auto-merge:
+      - match:
+          update-types: ["patch", "minor"]
+        auto-merge-action: "squash"
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "weekly"
       day: "monday"
-      time: "03:00"
-    assignees:
-      - "Mostafa-SAID7"
+      time: "09:00"
     labels:
+      - "docker"
       - "dependencies"
-      - "automated"
-    auto-merge: true
-    auto-merge-pull-requests: true
-    auto-merge-method: "squash"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
