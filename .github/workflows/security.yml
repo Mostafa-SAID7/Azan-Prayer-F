@@ -24,4 +24,4 @@ jobs:
           cache: 'npm'
       
       - run: npm install --legacy-peer-deps --ignore-scripts
-      - run: npm audit --audit-level=moderate
+      - run: npm audit --audit-level=high --omit=dev
