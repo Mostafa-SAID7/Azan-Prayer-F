@@ -1,0 +1,44 @@
+name: Security
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  NODE_VERSION: 20.11.0
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - run: npm ci
+      - run: npm audit --audit-level=moderate
+      - run: npm audit fix --dry-run
+      
+      - name: OWASP Dependency Check
+        uses: dependency-check/Dependency-Check_Action@v1.1.1
+        with:
+          project: 'Azan-Prayer-F'
+          path: '.'
+          format: 'JSON'
+          args: --enableExperimental
+      
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-report
+          path: reports/
+          retention-days: 5

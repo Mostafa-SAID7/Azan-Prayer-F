@@ -1,0 +1,50 @@
+name: Performance
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  NODE_VERSION: 20.11.0
+
+jobs:
+  performance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      
+      - name: Start server
+        run: |
+          npx serve@latest -s dist -l 3000 &
+          sleep 3
+      
+      - name: Wait ready
+        run: |
+          for i in {1..30}; do
+            curl -f http://localhost:3000 && exit 0
+            sleep 1
+          done
+          exit 1
+      
+      - name: Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v9
+        with:
+          uploadArtifacts: true
+          runs: 3
+          configPath: ./lighthouserc.json
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
