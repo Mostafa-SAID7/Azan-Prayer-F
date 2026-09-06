@@ -1,0 +1,21 @@
+# Code ownership and review requirements
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owners for everything
+* @Mostafa-SAID7
+
+# Workflows require review
+.github/workflows/ @Mostafa-SAID7
+
+# Documentation
+docs/ @Mostafa-SAID7
+README.md @Mostafa-SAID7
+
+# CI/CD configuration
+.github/ @Mostafa-SAID7
+vercel.json @Mostafa-SAID7
+docker-compose.yml @Mostafa-SAID7
+Dockerfile @Mostafa-SAID7
+
+# Source code
+src/ @Mostafa-SAID7
