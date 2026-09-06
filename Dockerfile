@@ -3,13 +3,13 @@
 ###############################################
 
 # Stage 1: Build stage
-FROM node:24-alpine as builder
+FROM node:24-alpine AS builder
 
 WORKDIR /app
 
 # Install dependencies with optimizations
 COPY package*.json ./
-RUN npm ci
+RUN npm install --legacy-peer-deps --ignore-scripts
 
 # Copy source code
 COPY . .
@@ -19,7 +19,7 @@ RUN npm run build && \
     npm prune --production
 
 # Stage 2: Runtime stage (minimal distroless image)
-FROM node:24-alpine as distroless-prep
+FROM node:24-alpine AS distroless-prep
 
 WORKDIR /app
 COPY --from=builder /app/dist ./dist
