@@ -6,9 +6,6 @@ updates:
       interval: "weekly"
       day: "monday"
       time: "09:00"
-    allow:
-      - dependency-type: "production"
-      - dependency-type: "development"
     reviewers:
       - "Mostafa-SAID7"
     assignees:
@@ -16,10 +13,6 @@ updates:
     labels:
       - "dependencies"
       - "automated"
-    auto-merge:
-      - match:
-          update-types: ["patch", "minor"]
-        auto-merge-action: "squash"
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
@@ -35,3 +28,6 @@ updates:
       interval: "weekly"
       day: "monday"
       time: "09:00"
+    labels:
+      - "ci"
+      - "dependencies"
