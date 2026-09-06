@@ -1,0 +1,33 @@
+﻿version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "03:00"
+    assignees:
+      - "Mostafa-SAID7"
+    labels:
+      - "dependencies"
+      - "automated"
+    auto-merge: true
+    auto-merge-pull-requests: true
+    auto-merge-method: "squash"
+    pull-request-branch-name:
+      separator: "/"
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "03:00"
+    assignees:
+      - "Mostafa-SAID7"
+    labels:
+      - "dependencies"
+      - "automated"
+    auto-merge: true
+    auto-merge-pull-requests: true
+    auto-merge-method: "squash"
