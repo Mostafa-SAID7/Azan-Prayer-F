@@ -39,11 +39,11 @@ jobs:
               'main'
             ]
           extra_plugins: |
-            @semantic-release/commit-analyzer
-            @semantic-release/release-notes-generator
-            @semantic-release/changelog
-            @semantic-release/npm
-            @semantic-release/github
+            @semantic-release/commit-analyzer@11.1.0
+            @semantic-release/release-notes-generator@14.1.2
+            @semantic-release/changelog@6.0.3
+            @semantic-release/npm@12.1.1
+            @semantic-release/github@10.1.6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
